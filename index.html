@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Git commit char count</title>
+  <style>
+    body {
+      background-color: #1c1c1c;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+    }
+
+    .commit-message {
+      width: 500px;
+    }
+
+    .status {
+      display: flex;
+      height: 22px;
+      justify-content: center;
+      align-items: center;
+      padding: 0 5px;
+    }
+
+    .status.good {
+      background-color: green;
+    }
+
+    .status.ok {
+      background-color: orange;
+    }
+
+    .status.bad {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <input type="text" id="commit-message" class="commit-message" placeholder="Commit message">
+    <span id="status" class="status good">0</span>
+  </div>
+  <script type="text/javascript">
+    let commitMessage = document.getElementById('commit-message')
+    let status = document.getElementById('status')
+    commitMessage.addEventListener('input', function (e) {
+      status.innerHTML = commitMessage.value.length
+      if (commitMessage.value.length <= 50) {
+        status.classList.remove('bad')
+        status.classList.remove('ok')
+        status.classList.add('good')
+      } else if (commitMessage.value.length > 50 && commitMessage.value.length <= 72) {
+        status.classList.remove('bad')
+        status.classList.remove('good')
+        status.classList.add('ok')
+      } else {
+        status.classList.remove('good')
+        status.classList.remove('ok')
+        status.classList.add('bad')
+      }
+    })
+  </script>
+</body>
+
+</html>
